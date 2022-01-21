@@ -5,15 +5,15 @@ wordList = wordFile.readlines()
 for i in range(len(wordList)):
     wordList[i] = wordList[i].strip()
 
-centre = str.lower(input("Enter the centre letter: "))
-outer = str.lower(input("Enter the other letters: "))
-letters = centre + outer
+letters = str.lower(input("Enter the centre letter: "))
+letters += str.lower(input("Enter the other letters: "))
 answers = []
+pangram = []
 valid = False
 
 for i in range(len(wordList)):
     valid = False
-    if(centre in wordList[i]):
+    if(letters[0] in wordList[i] and len(wordList[i]) > 3):
         valid = True
         for j in range(len(wordList[i])):
             if(wordList[i][j] not in letters):
@@ -21,5 +21,17 @@ for i in range(len(wordList)):
     if(valid):
         answers.append(wordList[i])
 
-print(answers)
-print(len(answers))
+for i in range(len(answers)):
+    pan = True
+    for j in range(7):
+        if(letters[j] not in answers[i]):
+            pan = False
+    if(pan):
+        pangram.append(answers[i])
+
+
+
+for i in range(len(answers)):
+    print(answers[i])
+
+print(pangram)
